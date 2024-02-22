@@ -1,8 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Platform } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Platform, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback} from 'react-native';
+import { FontAwesome5 }from '@expo/vector-icons'; 
 
 export default function App() {
   return (
+    <KeyboardAvoidingView 
+      behavior={Platform.OS === 'ios' ? `padding` : `height`}
+    >
+    
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+
     <View style={styles.container}>
       <StatusBar backgroundColor="#FFF" translucent={false}/>
       
@@ -26,17 +33,41 @@ export default function App() {
           >Forgotten password?
           </Text>
         </TouchableOpacity>
+      </View>
 
         <TouchableOpacity style={styles.loginButton}>
           <Text style={styles.loginText}>
           Acessar
           </Text>
         </TouchableOpacity>
+      
+
+      <TouchableOpacity style={styles.faceContainer}>
+        <FontAwesome5 name="facebook" size={25} color="#399fff"/>
+        <Text style={styles.faceText}>Continue as Arthur</Text>
+      </TouchableOpacity>
+
+      <View style={styles.divider}>
+        <View style={styles.dividerLine}></View>
+        <Text style={styles.dividerText}>OR</Text>
+        <View style={styles.dividerLine}></View>
       </View>
 
+      <View stlye={styles.signUpContainer}>
+        <Text style={styles.signUpText}>Don’t have an account?</Text>
+        <TouchableOpacity>
+          <Text style={styles.signUpButton}>Sign Up</Text>
+        </TouchableOpacity>
+      </View>
+
+
     </View>
+    </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
+  
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -78,7 +109,43 @@ const styles = StyleSheet.create({
   loginText:{
     color: '#FFF',
     fontSize: 17
+  },
+  dividerText:{
+    marginHorizontal: '3%',
+  },
+  faceContainer:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: '15%'
+  },
+  faceText:{
+    color: '#399fff',
+    paddingLeft: 8,
+    fontSize: 15
+  },
+  divider:{
+    marginTop: '10%',
+    flexDirection: 'row',
+    width: '90%',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  dividerLine:{
+    width: '45%',
+    height: 2,
+    backgroundColor: '#EFEDED',
+    borderRadius: 5
+  },
+  signUpContainer:{
+    flexDirection: 'row',
+    marginTop: '10%'
+  },
+  signUpText:{
+    color: '#C4C4C4',
+    paddingRight: 5
+  },
+  signUpButton:{
+    color: '#399fff',
+    fontWeight: 'bold'
   }
-
-
 });
